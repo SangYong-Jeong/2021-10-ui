@@ -1,46 +1,59 @@
-/************* Global init ***************/
+/*************** global init **************/
 var $wrapper = $('.wrapper1');
 var $slide = $wrapper.find('.slide-wrap');
 var $pager = $wrapper.find('.pager');
-var interval, n = 1, speed = 2000, aniSpeed = 500, cnt = $slide.find('.slide').length;
-console.log($($pager));
-/************* user function *************/
-function chgPager (el, idx) {
-	$(el).removeClass('active');
-	$(el).eq(idx).addClass('active');
+var $btPrev = $wrapper.find('.bt-prev');
+var $btNext = $wrapper.find('.bt-next');
+var interval; // setInterval을 넣어놓을 변수 
+var idx = 0;  // animation이 움직일 값의 인자 0, -100%, -200% ...  
+var gap = 2000; // setInterval의 간격
+var speed = 500;  // animation speed
+var last = $slide.find('.slide').length - 1; // $('.slide')의 마지막 index
+
+/************** user function *************/
+function ani() {
+	$slide.stop().animate({'left': (-idx*100)+'%'}, speed);
+	$pager.removeClass('active');
+	$pager.eq(idx === last ? 0 : idx).addClass('active');
 }
 
-/************* event callback ************/
-function onAni () {
-	$slide.stop().animate({'left': -(n*100)+'%'}, aniSpeed, function () {
-		if(n === cnt - 1) {
-			$slide.css('left', 0)
-			chgPager($pager, 0);
-			n =1;
-		}
-		else {
-			chgPager($pager, n++);
-		}
-	});
-}
-
-function onEnter() {
+/************** event callback ************/
+function onEnter () {
 	clearInterval(interval);
 }
 
-function onLeave() {
-	interval = setInterval(onAni, speed);
+function onLeave () {
+	interval = setInterval(onNext, gap);
 }
 
-function onPagerClick() {
-	n = $(this).index();
-	onAni();
+
+function onPager () {
+	idx = $(this).index();
+	ani();
 }
 
-/************* event init ****************/
-interval = setInterval(onAni, speed);
+function onPrev () {
+	if(idx === 0) {
+		$slide.css('left', -last * 100+'%');
+		idx = last;
+	}
+	idx--
+	ani();
+}
+
+function onNext () {
+	if(idx === last) {
+		$slide.css('left', 0);
+		idx = 0;
+	}
+	idx++;
+	ani();
+}
+/*************** event init ***************/
 $wrapper.mouseenter(onEnter).mouseleave(onLeave);
-$pager.click(onPagerClick);
+$pager.click(onPager);
+$btPrev.click(onPrev);
+$btNext.click(onNext);
 
-/************* start init ****************/
-
+/*************** start init ***************/
+interval = setInterval(onNext, gap);
