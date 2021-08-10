@@ -12,7 +12,7 @@ var last = $slide.find('.slide').length - 1; // $('.slide')의 마지막 index
 
 /************** user function *************/
 function ani() {
-	$slide.stop().animate({'left': (-idx*100)+'%'}, 0);
+	$slide.stop().animate({'top': (-idx*100)+'%'}, speed);
 	$pager.removeClass('active');
 	$pager.eq(idx === last ? 0 : idx).addClass('active');
 }
@@ -34,7 +34,7 @@ function onPager () {
 
 function onPrev () {
 	if(idx === 0) {
-		$slide.css('left', -last * 100+'%');
+		$slide.css('top', -last * 100+'%');
 		idx = last;
 	}
 	idx--
@@ -43,7 +43,7 @@ function onPrev () {
 
 function onNext () {
 	if(idx === last) {
-		$slide.css('left', 0);
+		$slide.css('top', 0);
 		idx = 0;
 	}
 	idx++;
