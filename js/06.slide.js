@@ -1,3 +1,5 @@
 var slide = new Slide('.wrapper', {
-	effect: 'fade'
+	autoPlay: false,
+	effect: 'myStyle',
+	spped: 'myStyle'
 });

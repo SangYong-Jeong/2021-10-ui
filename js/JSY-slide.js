@@ -2,11 +2,30 @@ function Slide (_parent, _opt) {
 	var opt = _opt || {};
 	this.parent = _parent;
 	this.effect = opt.effect || 'horizontal';
-	this.speed = opt.speed || 500;
-	this.autoPlay = opt.autoPlay || true;  
-	this.autoPlaySpeed = opt.autoPlayGap || 3000; 
-	console.log(this.effect);
+	this.speed = Number(opt.speed) || 500;
+	this.autoPlay = opt.autoPlay === false ? false : true;  
+	this.autoPlaySpeed = Number(opt.autoPlayGap) || 3000; 
+
+	if(
+		this.effect.toLowerCase() !== 'horizontal' && 
+		this.effect.toLowerCase() !== 'vertical' &&
+		this.effect.toLowerCase() !== 'fade') {
+			this.effect = 'horizontal';
+		}
+	if(
+		this.effect.toLowerCase() !== 'horizontal' && 
+		this.effect.toLowerCase() !== 'vertical' &&
+		this.effect.toLowerCase() !== 'fade') {
+			this.effect = 'horizontal';
+		}
+	this.init();
 }
+
+Slide.prototype.init = function () {
+	console.log(this);
+}
+
+
 
 /* {
 	effect: 'horizontal', 'vertical', 'fade'
