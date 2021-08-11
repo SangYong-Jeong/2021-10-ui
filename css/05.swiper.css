@@ -1,8 +1,9 @@
 /***************** global init ***************/
 
 /**********************  *********************/
-.my-swiper {max-width: 720px; margin: 50px auto;}
-
+.my-swiper, .my-swiper2 {max-width: 720px; margin: 50px auto;}
+.swiper-pagination-bullet-active {background-color: #f00;}
+.swiper-button-next, .swiper-button-prev {color: #f00;}
 
 /******************* 반응형 ******************/
 @media (max-width: 1399px) {
