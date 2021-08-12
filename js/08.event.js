@@ -39,13 +39,15 @@ function onResize (e) {
 	console.log($(this).outerWidth(true))
 }
 
-
-
+// function onScroll2 () {
+// 	console.log($(this).outerHeigth());
+// }
+console.log($(this).outerHeight())
 
 
 /************* event init ****************/
-window.addEventListener('scroll', onScroll).trigger('scroll');
-// $(window).scroll(onScroll);
+// window.addEventListener('scroll', onScroll).trigger('scroll');
+$(window).scroll(onScroll2);
 
 // window.addEventListener('wheel', onWheel);
 // $(window).on('wheel', onWheel);
