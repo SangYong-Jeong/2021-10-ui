@@ -11,10 +11,11 @@ function onClick () {
 	$('.img-wrap img').attr('src', $(this).data('img'));
 	$('.img-wrap .name').html( $(this).data('name'));
 
-	this.dataset['flag'] = 'ABCD';
-	$(this).data('flag2', 'ABCDE' );
+	this.dataset['flag2'] = 'ABCD';
+	$(this).data('flag', 'ABCDE' );
 
-	
+	console.log(this.dataset['flag2']);
+	console.log($(this).data('flag'));
 }
 
 /************* event init ****************/
