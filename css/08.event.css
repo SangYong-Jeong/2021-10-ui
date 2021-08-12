@@ -1,0 +1,63 @@
+/***************** global init ***************/
+.wrapper {width: 100%; overflow: hidden;}
+section.page {height: 100vh; display: flex; flex-direction: column; justify-content: space-between; padding: 3em;}
+section.page h1.title {font-size: 3em; color: #fff;}
+section.page h1.title {animation-duration: 1s; animation-fill-mode: forwards; opacity: 0; animation-name: toLeft; animation-play-state: paused;}
+section.page h1.title.active {animation-play-state: running;}
+section.page .content-wrap {display: flex; width: 100%;}
+section.page .content-wrap .box {width: 31.3333%; height: 200px; margin: 1%; animation-duration: 1s; animation-fill-mode: forwards; opacity: 0; animation-play-state: paused;}
+section.page .content-wrap .box.active {animation-play-state: running;}
+section.page .content-wrap .box1 {background-color: darkturquoise; animation-name: toRight;}
+section.page .content-wrap .box2 {background-color: crimson; animation-name: toTop;}
+section.page .content-wrap .box3 {background-color: darkorange; animation-name: toLeft;}
+
+/********************** section *********************/
+section.page1 {background-color: cadetblue;}
+section.page2 {background-color: darkgreen;}
+section.page3 {background-color: #887a;}
+section.page4 {background-color: darkorchid;}
+section.page5 {background-color: coral;}
+
+/********************** animation *********************/
+@keyframes toLeft {
+	0% {opacity: 0; transform: translateX(200px);}
+	100% {opacity: 1; transform: translateX(0);}
+}
+
+@keyframes toRight {
+	0% {opacity: 0; transform: translateX(-200px);}
+	100% {opacity: 1; transform: translateX(0);}
+}
+
+@keyframes toTop {
+	0% {opacity: 0; transform: translateY(200px);}
+	100% {opacity: 1; transform: translateY(0);}
+}
+
+@keyframes toBottom {
+	0% {opacity: 0; transform: translateY(-200px);}
+	100% {opacity: 1; transform: translateY(0);}
+}
+
+
+
+/******************* 반응형 ******************/
+@media (max-width: 1399px) {
+	
+}
+
+@media (max-width: 1199px) {
+	
+}
+
+@media (max-width: 991px) {
+	
+}
+
+@media (max-width: 767px) {
+	
+}
+
+@media (max-width: 575px) {
+	
+}

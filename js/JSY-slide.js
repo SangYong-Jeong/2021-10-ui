@@ -11,17 +11,14 @@ function Slide(_parent, _opt) {
 	this.speed = Number(opt.speed) || 500;
 	this.autoPlay = opt.autoPlay === false ? false : true;
 	this.autoPlaySpeed = Number(opt.autoPlaySpeed) || 3000;
-	this.useNavigation = opt.navigation && opt.navigation.prev && opt.navigation.next ? true : false; 
-	this.usePagination = opt.pagination && opt.pagination.el ? true : false; 
+	this.useNavigation = opt.navigation && opt.navigation.prev && opt.navigation.next ? true : false;
+	this.usePagination = opt.pagination && opt.pagination.el ? true : false;
 
 	if(this.effect.toLowerCase() !== 'horizontal' && this.effect.toLowerCase() !== 'vertical' && this.effect.toLowerCase() !== 'fade') {
 		this.effect = 'horizontal';
 	}
 	this.effect += 'Type';
 	this.wrap.addClass(this.effect);
-
-
-
 
 	/******* horiInit *******/
 	var horiInit = function () {
@@ -32,9 +29,6 @@ function Slide(_parent, _opt) {
 	}.bind(this);
 
 	/******* fadeInit *******/
-
-
-
 	var fadeInit = function () {
 		this.last = this.slide.length - 1;
 
@@ -78,7 +72,6 @@ function Slide(_parent, _opt) {
 		this.slide = this.wrap.find('.slide');
 		vertInit();
 	}
-	
 	/******* navigation *******/
 	if(this.useNavigation) {
 		this.prev = this.wrapper.find(opt.navigation.prev);
@@ -86,28 +79,28 @@ function Slide(_parent, _opt) {
 		this.prev.click(this.onPrev.bind(this));
 		this.next.click(this.onNext.bind(this));
 	}
-		/******* pagination *******/
-		if(this.usePagination) {
-			this.pagers = this.wrapper.find(opt.pagination.el);
-			var cnt = (this.effect === 'fadeType') ? this.slide.length : this.slide.length - 1;
-			for(var i = 0; i < cnt; i++) {
-				$('<div>●</div>').appendTo(this.pagers).click(this.onPager.bind(this));
-			}
+	/******* pagination *******/
+	if(this.usePagination) {
+		this.pagers = this.wrapper.find(opt.pagination.el);
+		var cnt = (this.effect === 'fadeType') ? this.slide.length : this.slide.length - 1;
+		for(var i=0; i<cnt; i++) {
+			$('<div>●</div>').appendTo(this.pagers).click(this.onPager.bind(this));
 		}
+	}
 }
 
 Slide.prototype.ani = function () {
 	switch(this.effect) {
 		case 'horizontalType':
 			this.wrap.stop().animate({ 'left': -this.idx * 100 + '%' }, this.speed);
-			if (this.usePagination) {
+			if(this.usePagination) {
 				this.pagers.children('div').removeClass('active');
 				this.pagers.children('div').eq(this.idx === this.last ? 0 : this.idx).addClass('active');
 			}
 			break;
 		case 'verticalType':
 			this.wrap.stop().animate({ 'top': -this.idx * 100 + '%' }, this.speed);
-			if (this.usePagination){
+			if(this.usePagination) {
 				this.pagers.children('div').removeClass('active');
 				this.pagers.children('div').eq(this.idx === this.last ? 0 : this.idx).addClass('active');
 			}
@@ -115,7 +108,7 @@ Slide.prototype.ani = function () {
 		case 'fadeType':
 			this.slide.eq(this.idx).css({ 'z-index': ++this.depth, 'opacity': 0 });
 			this.slide.eq(this.idx).stop().animate({'opacity': 1}, this.speed);
-			if (this.usePagination) {
+			if(this.usePagination) {
 				this.pagers.children('div').removeClass('active');
 				this.pagers.children('div').eq(this.idx).addClass('active');
 			}
@@ -129,7 +122,7 @@ Slide.prototype.onNext = function() {
 	}
 	else {
 		if(this.idx === this.last) {
-			this.wrap.css('left', 0);
+			this.wrap.css(this.effect === 'horizontalType' ? 'left' : 'top', 0);
 			this.idx = 0;
 		}
 		this.idx++;
@@ -139,21 +132,19 @@ Slide.prototype.onNext = function() {
 
 Slide.prototype.onPrev = function() {
 	if(this.effect === 'fadeType') {
-		this.idx = this.idx === this.last ? 0 : this.idx + 1;
 		this.idx = this.idx === 0 ? this.last : this.idx - 1;
 	}
 	else {
 		if(this.idx === 0) {
-			this.wrap.css('left', -this.last * 100+'%');
+			this.wrap.css(this.effect === 'horizontalType' ? 'left' : 'top', -this.last * 100 + '%');
 			this.idx = this.last;
 		}
-		this.idx--
+		this.idx--;
 	}
 	this.ani();
 }
 
 Slide.prototype.onPager = function(e) {
-	// console.log($(e.target).index(), this);
 	this.idx = $(e.target).index();
 	this.ani();
 }
